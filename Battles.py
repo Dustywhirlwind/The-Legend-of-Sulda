@@ -51,22 +51,29 @@ print('Вы встретили на пути', enemy_name)
 
 while enemy_hp > 0 and player_hp > 0:
 
-   player_action = input()
-   if player_action == 'побег':
+   print('1.Атака 2.Инвентарь 3.Побег')
+   player_action = int(input())
+   if player_action == 3:
        luck = random.randint(0, 1)
        if luck == 1:
            print('Удачный побег')
+           enemy_hp = 0
+       elif luck == 0:
+           print('Неудача')
+           player_hp -= enemy_atk
 
-   elif player_action == 'атака':
+
+   elif player_action == 1:
         enemy_hp -= player_atk
         player_hp -= enemy_atk
-        print('Получено', enemy_atk, 'едениц урона')# +подробности
+
+        print('Получено', enemy_atk, 'единиц урона')# +подробности
         if enemy_hp < 0:
             enemy_hp = 0
         else:
             print('Здоровье врага:', enemy_hp)
 
-   elif player_action == 'инвентарь':
+   elif player_action == 2:
         print(inventory)
         player_action = input()
         if player_action == 'зелье здоровья':
@@ -85,12 +92,12 @@ if player_hp < 0:
     print('Конец игры')
 
 elif enemy_hp == 0:
-    player_price = random.randint(1, 10)
-    player_bank += player_price
+    player_prize = random.randint(1, 10)
+    player_bank += player_prize
     if player_price == 1:
-        print('Победа в бою. Заработанa', '\033[33m', player_price, '\033[0m', "монетa")     #нужно больше узнать по этому поводу
+        print('Победа в бою. Заработанa', '\033[33m', player_prize, '\033[0m', "монетa")     #нужно больше узнать по этому поводу
     elif 1 < player_price < 5:
-        print('Победа в бою. Заработано', '\033[33m', player_price, '\033[0m', 'монеты')
+        print('Победа в бою. Заработано', '\033[33m', player_prize, '\033[0m', 'монеты')
     else:
-        print('Победа в бою. Заработанo', '\033[33m', player_price, '\033[0m', 'монет')
-    player_price = 0
+        print('Победа в бою. Заработанo', '\033[33m', player_prize, '\033[0m', 'монет')
+    player_prize = 0
