@@ -1,12 +1,14 @@
+import random
+from Colores import *
 '''
 боёвка и враги. Задачи: рандомайзер врагов(выполнено),
 учёт урона(выполнено частично), дроп в виде монеток (1-10) (выполнено)
 '''
-player_hp = 100           #не забудь убрать
-player_atk = 10           #не забудь убрать
-import random
-def lightblue(text):
-    print("\033[36m {}" .format(text))
+player_hp = 100
+player_atk = 10
+#не забудь убрать
+
+
 player_price = 0
 inventory = ['1', 'зелье здоровья']
 character = ['удачливый рыбак']
@@ -51,44 +53,44 @@ print('Вы встретили на пути', enemy_name)
 
 while enemy_hp > 0 and player_hp > 0:
 
-   print('1.Атака 2.Инвентарь 3.Побег')
-   player_action = int(input())
-   if player_action == 3:
-       luck = random.randint(0, 1)
-       if luck == 1:
-           print('Удачный побег')
-           enemy_hp = 0
-           enemy_atk = 0
-       elif luck == 0:
-           print('Неудача')
-           player_hp -= enemy_atk
+    print('1.Атака 2.Инвентарь 3.Побег')
+    player_action = int(input())
+    if player_action == 3:
+        luck = random.randint(0, 1)
+        if luck == 1:
+            print('Удачный побег')
+            enemy_hp = 0
+            enemy_atk = 0
+        elif luck == 0:
+            player_hp -= enemy_atk
+            print('Неудача')
 
-
-   elif player_action == 1:
+    elif player_action == 1:
         enemy_hp -= player_atk
         player_hp -= enemy_atk
 
-        print('Получено', enemy_atk, 'урона')# +подробности
+        print('Получено', enemy_atk, 'урона')
+#+подробности
         print('Нанесено:', player_atk, 'урона')
         if enemy_hp < 0:
             enemy_hp = 0
         else:
             print('Здоровье врага:', enemy_hp)
 
-   elif player_action == 2:
+    elif player_action == 2:
         print(inventory)
         player_action = input()
         if player_action == 'зелье здоровья':
-              if 'зелье здоровья' in inventory:
-                  player_hp += 35
-                  player_hp -= enemy_atk
-                  print('Здоровье игрока', '\033[')
-        elif 'зелье здоровья' not in inventory:
+            if 'зелье здоровья' in inventory:
+                player_hp += 35
+                player_hp -= enemy_atk
+                print('Здоровье игрока', '\033[')
+        elif 'hp' not in inventory:
             print('нет предмета')
 
-   else:
-       print('Ошибка в вводе или пустой ввод ')
-   print('здоровье игрока', player_hp)
+    else:
+        print('Ошибка в вводе или пустой ввод')
+    print('здоровье игрока', player_hp)
 
 if player_hp < 0:
     print('Конец игры')
@@ -96,10 +98,7 @@ if player_hp < 0:
 elif enemy_hp == 0:
     player_prize = random.randint(1, 10)
     player_bank += player_prize
-    if player_price == 1:
-        print('Победа в бою. Заработанa', '\033[33m', player_prize, '\033[0m', "монетa")     #нужно больше узнать по этому поводу
-    elif 1 < player_price < 5:
-        print('Победа в бою. Заработано', '\033[33m', player_prize, '\033[0m', 'монеты')
-    else:
-        print('Победа в бою. Заработанo', '\033[33m', player_prize, '\033[0m', 'монет')
+    reward('Получено')
+    money(player_prize)
+    white('монет')
     player_prize = 0
