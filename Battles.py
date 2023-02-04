@@ -58,6 +58,7 @@ while enemy_hp > 0 and player_hp > 0:
        if luck == 1:
            print('Удачный побег')
            enemy_hp = 0
+           enemy_atk = 0
        elif luck == 0:
            print('Неудача')
            player_hp -= enemy_atk
@@ -67,7 +68,8 @@ while enemy_hp > 0 and player_hp > 0:
         enemy_hp -= player_atk
         player_hp -= enemy_atk
 
-        print('Получено', enemy_atk, 'единиц урона')# +подробности
+        print('Получено', enemy_atk, 'урона')# +подробности
+        print('Нанесено:', player_atk, 'урона')
         if enemy_hp < 0:
             enemy_hp = 0
         else:
